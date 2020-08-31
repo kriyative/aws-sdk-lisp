@@ -47,6 +47,10 @@
                      :headers `(("Authorization" . ,authorization)
                                 ("X-Amz-Date" . ,x-amz-date)
                                 ("X-Amz-Content-Sha256" . ,(aws-sdk/utils::sha-256 (or payload "")))
-                                ("Content-Type" . "application/x-amz-json-1.0")
-                                ,@headers)
+                                ,@headers
+                                ,@(unless (assoc :content-type headers
+                                                 :key (lambda (s)
+                                                        (intern (string-upcase s) :keyword))
+                                                 :test 'eq)
+                                    '(("Content-Type" . "application/x-amz-json-1.0"))))
                      :content payload)))))
