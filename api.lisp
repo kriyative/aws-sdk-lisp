@@ -53,4 +53,5 @@
                                                         (intern (string-upcase s) :keyword))
                                                  :test 'eq)
                                     '(("Content-Type" . "application/x-amz-json-1.0"))))
-                     :content payload)))))
+                     :content payload
+                     :force-string t)))))
